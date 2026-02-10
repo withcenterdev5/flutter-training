@@ -7,7 +7,7 @@ class BScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Screen BScreen"),
+        title: Text("B Screen"),
       ),
     );
   }
