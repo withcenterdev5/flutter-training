@@ -18,7 +18,7 @@ class CounterWidget extends StatelessWidget {
         children: [
           // Rebuild the text widget to display the updated state
           Consumer<CounterModel>(
-            builder:(_,model,_,) => Text("Counter: ${model._count}", style: TextStyle(color: AppColors.primaryColor),),
+            builder:(_,model,_,) => Text("Counter: ${model.count}", style: TextStyle(color: AppColors.primaryColor),),
           ),
         ],
       ),
