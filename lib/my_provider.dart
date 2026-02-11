@@ -20,7 +20,7 @@ class CounterWidget extends StatelessWidget {
           Consumer<CounterModel>(
             builder:(_,model,_,) => Center(
               child: Text(
-                "Count: ${model.count}", 
+                "${AppStrings.counterLabel} ${model.count}", 
                 style: TextStyle(
                   color: AppColors.dark, 
                   fontSize: AppContentElements.header
