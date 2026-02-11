@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
+// Create the counter model with initial state
 class CounterModel extends ChangeNotifier {
   int _count = 4;
 
@@ -8,17 +10,6 @@ class CounterModel extends ChangeNotifier {
     _count++;
     notifyListeners();
   }
-}
-
-void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create:(_,) => CounterModel(),
-      child: MaterialApp(
-        home: CounterWidget(),
-      ),
-    ),
-  );
 }
 
 class CounterWidget extends StatelessWidget {
@@ -38,4 +29,16 @@ class CounterWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create:(_,) => CounterModel(),
+      child: MaterialApp(
+        home: CounterWidget(),
+      ),
+    ),
+  );
 }
