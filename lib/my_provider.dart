@@ -37,6 +37,11 @@ class CounterWidget extends StatelessWidget {
             onPressed: () => context.read<CounterModel>().decrement(),
             child: Icon(Icons.remove),
           ),
+          // Calls the reset method fro the counter model
+          FloatingActionButton(
+            onPressed: () => context.read<CounterModel>().reset,
+            child: Icon(Icons.refresh),
+          ),
         ],
       )
 

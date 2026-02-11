@@ -5,7 +5,6 @@ class CounterModel extends ChangeNotifier {
   // Initial state for count value
   int count = 4;
 
-  // Increment method
   void increment() {
     count++;
     notifyListeners();
@@ -13,6 +12,11 @@ class CounterModel extends ChangeNotifier {
 
   void decrement() {
     count--;
+    notifyListeners();
+  }
+
+  void reset(){
+    count = 0;
     notifyListeners();
   }
 }
