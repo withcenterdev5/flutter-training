@@ -29,13 +29,14 @@ class CounterWidget extends StatelessWidget {
         Consumer<CounterModel>(
           builder:(_,model,_,) => Text("Counter: ${model._count}"),
         ),
-        //Button for incrementing the count value from the count model
-        ElevatedButton(
-          onPressed: () => context.read<CounterModel>().increment(),
-          child: const Text(
-            "Increment",
-          ),
-        ),
+        //Buttons for incrementing and decrmenting the count value from the count model
+       Column(
+        children: [
+          FloatingActionButton(onPressed: () => context.read<CounterModel>().increment()),
+          FloatingActionButton(onPressed: () => context.read<CounterModel>().decrement()),
+        ],
+       )
+       
       ],
     );
   }
