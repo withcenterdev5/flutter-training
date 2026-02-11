@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // Create the counter model with initial state
-class CounterModel
-    extends
-        ChangeNotifier {
+class CounterModel extends ChangeNotifier {
   // Initial state for count value
   int _count = 4;
 
@@ -15,39 +13,20 @@ class CounterModel
   }
 }
 
-class CounterWidget
-    extends
-        StatelessWidget {
-  const CounterWidget({
-    super.key,
-  });
+class CounterWidget extends StatelessWidget {
+  const CounterWidget({super.key,});
 
   @override
-  build(
-    context,
-  ) {
+  build(context,) {
     return Column(
       children: [
         // Rebuild the text widget to display the updated state
-        Consumer<
-          CounterModel
-        >(
-          builder:
-              (
-                _,
-                model,
-                _,
-              ) => Text(
-                "Counter: ${model._count}",
-              ),
+        Consumer<CounterModel>(
+          builder:(_,model,_,) => Text("Counter: ${model._count}"),
         ),
         //Button for incrementing the count value from the count model
         ElevatedButton(
-          onPressed: () => context
-              .read<
-                CounterModel
-              >()
-              .increment(),
+          onPressed: () => context.read<CounterModel>().increment(),
           child: const Text(
             "Increment",
           ),
@@ -57,14 +36,10 @@ class CounterWidget
   }
 }
 
-void
-main() {
+void main() {
   runApp(
     ChangeNotifierProvider(
-      create:
-          (
-            _,
-          ) => CounterModel(),
+      create:(_,) => CounterModel(),
       child: MaterialApp(
         home: CounterWidget(),
       ),
