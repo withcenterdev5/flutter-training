@@ -25,38 +25,41 @@ class _CounterWidgetState extends State<CounterWidget> {
       ),
       body: Center(
         child: // Rebuild the text widget to display the updated state
-          Column(
-            mainAxisAlignment: .center,
-            children: [
-              Consumer<CounterModel>(
-                builder:(_,model,_,) => Center(
-                    child: Text(
-                      "${AppStrings.counterLabel} ${model.count}", 
-                      style: TextStyle(
-                      color: AppColors.dark, 
-                      fontSize: AppContentElements.header
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: .center,
+              children: [
+                Consumer<CounterModel>(
+                  builder:(_,model,_,) => Center(
+                      child: Text(
+                        "${AppStrings.counterLabel} ${model.count}", 
+                        style: TextStyle(
+                        color: AppColors.dark, 
+                        fontSize: AppContentElements.header
+                      )
                     )
-                  )
+                  ),
                 ),
-              ),
-              TextField(
-                controller: textEditingController,
-                decoration: InputDecoration(
-                  hintText: AppStrings.typeCountLabel
+                TextField(
+                  controller: textEditingController,
+                  decoration: InputDecoration(
+                    hintText: AppStrings.typeCountLabel
+                  ),
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  final value = int.tryParse(textEditingController.text);
-                  if (value != null){
-                    context.read<CounterModel>().incrementByAmount(value);
-                  } else {
-
-                  }
-                }, 
-                child: Text(AppStrings.incrementButtonLabel)
-              )
-            ],
+                ElevatedButton(
+                  onPressed: () {
+                    final value = int.tryParse(textEditingController.text);
+                    if (value != null){
+                      context.read<CounterModel>().incrementByAmount(value);
+                    } else {
+            
+                    }
+                  }, 
+                  child: Text(AppStrings.incrementButtonLabel)
+                )
+              ],
+            ),
           )
       ),
       //Buttons for incrementing and decrmenting the count value from the count model
