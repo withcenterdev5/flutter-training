@@ -27,10 +27,12 @@ class CounterWidget extends StatelessWidget {
         spacing: 20.0,
         mainAxisAlignment: .end,
         children: [
+          // Calls the increment method from the counter model
           FloatingActionButton(
             onPressed: () => context.read<CounterModel>().increment(),
             child: Icon(Icons.add),
           ),
+          // Calls the decrement method fro the counter model
           FloatingActionButton(
             onPressed: () => context.read<CounterModel>().decrement(),
             child: Icon(Icons.remove),
