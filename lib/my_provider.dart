@@ -1,4 +1,5 @@
 import 'package:counter/constants/app_colors.dart';
+import 'package:counter/constants/app_content_elements.dart';
 import 'package:counter/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,13 +15,19 @@ class CounterWidget extends StatelessWidget {
         title: Text(AppStrings.appName),
         backgroundColor: Colors.lightGreenAccent,
       ),
-      body: Column(
-        children: [
-          // Rebuild the text widget to display the updated state
+      body: Center(
+        child: // Rebuild the text widget to display the updated state
           Consumer<CounterModel>(
-            builder:(_,model,_,) => Text("Counter: ${model.count}", style: TextStyle(color: AppColors.primaryColor),),
+            builder:(_,model,_,) => Center(
+              child: Text(
+                "Count: ${model.count}", 
+                style: TextStyle(
+                  color: AppColors.dark, 
+                  fontSize: AppContentElements.header
+                )
+              )
+            ),
           ),
-        ],
       ),
       //Buttons for incrementing and decrmenting the count value from the count model
       floatingActionButton: Column(
@@ -39,7 +46,7 @@ class CounterWidget extends StatelessWidget {
           ),
           // Calls the reset method fro the counter model
           FloatingActionButton(
-            onPressed: () => context.read<CounterModel>().reset,
+            onPressed: () => context.read<CounterModel>().reset(),
             child: Icon(Icons.refresh),
           ),
         ],
