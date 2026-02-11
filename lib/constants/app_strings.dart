@@ -8,5 +8,5 @@ class AppStrings {
   static final String appName = "My Provider";
 
   // counter specific constants
-  static final String counterLabel = "Count:P";
+  static final String counterLabel = "Count:";
 }
