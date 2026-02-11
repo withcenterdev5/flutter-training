@@ -42,7 +42,7 @@ class _CounterWidgetState extends State<CounterWidget> {
               TextField(
                 controller: textEditingController,
                 decoration: InputDecoration(
-                  hintText: "Type a value"
+                  hintText: AppStrings.typeCountLabel
                 ),
               ),
               ElevatedButton(
@@ -54,7 +54,7 @@ class _CounterWidgetState extends State<CounterWidget> {
 
                   }
                 }, 
-                child: Text("Increment by the amount above")
+                child: Text(AppStrings.incrementButtonLabel)
               )
             ],
           )
