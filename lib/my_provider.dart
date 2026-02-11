@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CounterModel
-    extends
-        ChangeNotifier {
-  int count = 4;
+class CounterModel extends ChangeNotifier {
+  int _count = 4;
 
   void increment() {
-    count++;
+    _count++;
     notifyListeners();
   }
 }
 
-void
-main() {
+void main() {
   runApp(
     ChangeNotifierProvider(
-      create:
-          (
-            _,
-          ) => CounterModel(),
+      create:(_,) => CounterModel(),
       child: MaterialApp(
         home: CounterWidget(),
       ),
@@ -27,36 +21,19 @@ main() {
   );
 }
 
-class CounterWidget
-    extends
-        StatelessWidget {
-  const CounterWidget({
-    super.key,
-  });
+class CounterWidget extends StatelessWidget {
+  const CounterWidget({super.key,});
 
   @override
-  build(
-    context,
-  ) {
-    final countProvider =
-        Provider.of<
-          CounterModel
-        >(
-          context,
-        );
+  build(context) {
     return Column(
       children: [
-        Text(
-          "Counter: ${countProvider.count} ",
+        Consumer<CounterModel>(
+          builder: (_, model, _) => Text("Counter: ${model._count}"),
         ),
         ElevatedButton(
-          onPressed: () {
-            countProvider.count++;
-            countProvider.increment();
-          },
-          child: Text(
-            "Increment",
-          ),
+          onPressed: () => context.read<CounterModel>().increment(),
+          child: const Text("Increment"),
         ),
       ],
     );
