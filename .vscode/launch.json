@@ -9,9 +9,10 @@
             "name": "flutter-training",
             "request": "launch",
             "flutterMode": "debug",
-            "deviceId": "apple_ios_simulator",
+            "deviceId": "0C8CED2F-F9EF-496C-AB41-BFAA6ACE0D3B",
             "cwd": "${workspaceFolder}",
-            "type": "dart"
+            "type": "dart",
+            "preLaunchTask": "start-ios-simulator"
         },
         {
             "name": "flutter-training (profile mode)",
