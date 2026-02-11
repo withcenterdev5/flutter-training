@@ -19,4 +19,9 @@ class CounterModel extends ChangeNotifier {
     count = 0;
     notifyListeners();
   }
+
+  void incrementByAmount(int value){
+    count += value;
+    notifyListeners();
+  }
 }

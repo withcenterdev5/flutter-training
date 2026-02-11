@@ -5,8 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:counter/models/counter_model.dart';
 
-class CounterWidget extends StatelessWidget {
+class CounterWidget extends StatefulWidget {
   const CounterWidget({super.key});
+
+  @override
+  State<CounterWidget> createState() => _CounterWidgetState();
+}
+
+class _CounterWidgetState extends State<CounterWidget> {
+  
+  final TextEditingController textEditingController = .new();
 
   @override
   Widget build(BuildContext context) {
@@ -17,17 +25,39 @@ class CounterWidget extends StatelessWidget {
       ),
       body: Center(
         child: // Rebuild the text widget to display the updated state
-          Consumer<CounterModel>(
-            builder:(_,model,_,) => Center(
-              child: Text(
-                "${AppStrings.counterLabel} ${model.count}", 
-                style: TextStyle(
-                  color: AppColors.dark, 
-                  fontSize: AppContentElements.header
-                )
+          Column(
+            mainAxisAlignment: .center,
+            children: [
+              Consumer<CounterModel>(
+                builder:(_,model,_,) => Center(
+                    child: Text(
+                      "${AppStrings.counterLabel} ${model.count}", 
+                      style: TextStyle(
+                      color: AppColors.dark, 
+                      fontSize: AppContentElements.header
+                    )
+                  )
+                ),
+              ),
+              TextField(
+                controller: textEditingController,
+                decoration: InputDecoration(
+                  hintText: "Type a value"
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  final value = int.tryParse(textEditingController.text);
+                  if (value != null){
+                    context.read<CounterModel>().incrementByAmount(value);
+                  } else {
+
+                  }
+                }, 
+                child: Text("Increment by the amount above")
               )
-            ),
-          ),
+            ],
+          )
       ),
       //Buttons for incrementing and decrmenting the count value from the count model
       floatingActionButton: Column(
