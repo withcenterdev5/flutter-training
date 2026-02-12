@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+
+void main(){
+  runApp(MaterialApp(
+    home: MessageWidget(),
+  ));
+}
+
+
 class MessageWidget extends StatefulWidget {
   const MessageWidget({super.key});
 
