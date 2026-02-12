@@ -54,13 +54,13 @@ class _CounterWidgetState extends State<CounterWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: .center,
       children: [
         Text('Count: ${widget.viewModel.count}',
             style: const TextStyle(fontSize: 24)),
         const SizedBox(height: 20),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: .center,
           children: [
             ElevatedButton(
               onPressed: widget.viewModel.increment,
