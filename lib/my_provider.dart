@@ -3,7 +3,32 @@ import 'package:counter/constants/app_content_elements.dart';
 import 'package:counter/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:counter/models/counter_model.dart';
+// Create the counter counterState with initial state
+
+class CounterState extends ChangeNotifier {
+  // Initial state for count value
+  int count = 4;
+
+  void increment() {
+    count++;
+    notifyListeners();
+  }
+
+  void decrement() {
+    count--;
+    notifyListeners();
+  }
+
+  void reset(){
+    count = 0;
+    notifyListeners();
+  }
+
+  void incrementByAmount(int value){
+    count += value;
+    notifyListeners();
+  }
+}
 
 class CounterWidget extends StatefulWidget {
   const CounterWidget({super.key});
@@ -30,10 +55,10 @@ class _CounterWidgetState extends State<CounterWidget> {
             child: Column(
               mainAxisAlignment: .center,
               children: [
-                Consumer<CounterModel>(
-                  builder:(context,model,child,) => Center(
+                Consumer<CounterState>(
+                  builder:(context,counterState,child,) => Center(
                       child: Text(
-                        "${AppStrings.counterLabel} ${model.count}", 
+                        "${AppStrings.counterLabel} ${counterState.count}", 
                         style: TextStyle(
                         color: AppColors.dark, 
                         fontSize: AppContentElements.header
@@ -51,7 +76,7 @@ class _CounterWidgetState extends State<CounterWidget> {
                   onPressed: () {
                     final value = int.tryParse(textEditingController.text);
                     if (value != null){
-                      context.read<CounterModel>().incrementByAmount(value);
+                      context.read<CounterState>().incrementByAmount(value);
                     } else {
             
                     }
@@ -62,24 +87,24 @@ class _CounterWidgetState extends State<CounterWidget> {
             ),
           )
       ),
-      //Buttons for incrementing and decrmenting the count value from the count model
+      //Buttons for incrementing and decrmenting the count value from the count counterState
       floatingActionButton: Column(
         spacing: 20.0,
         mainAxisAlignment: .end,
         children: [
-          // Calls the increment method from the counter model
+          // Calls the increment method from the counter counterState
           FloatingActionButton(
-            onPressed: () => context.read<CounterModel>().increment(),
+            onPressed: () => context.read<CounterState>().increment(),
             child: Icon(Icons.add),
           ),
-          // Calls the decrement method fro the counter model
+          // Calls the decrement method fro the counter counterState
           FloatingActionButton(
-            onPressed: () => context.read<CounterModel>().decrement(),
+            onPressed: () => context.read<CounterState>().decrement(),
             child: Icon(Icons.remove),
           ),
-          // Calls the reset method fro the counter model
+          // Calls the reset method fro the counter counterState
           FloatingActionButton(
-            onPressed: () => context.read<CounterModel>().reset(),
+            onPressed: () => context.read<CounterState>().reset(),
             child: Icon(Icons.refresh),
           ),
         ],
@@ -92,7 +117,7 @@ class _CounterWidgetState extends State<CounterWidget> {
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create:(_,) => CounterModel(),
+      create:(_,) => CounterState(),
       child: MaterialApp(
         title: AppStrings.appName,
         home: CounterWidget(),
