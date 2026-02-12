@@ -31,7 +31,7 @@ class _CounterWidgetState extends State<CounterWidget> {
               mainAxisAlignment: .center,
               children: [
                 Consumer<CounterModel>(
-                  builder:(_,model,_,) => Center(
+                  builder:(context,model,child,) => Center(
                       child: Text(
                         "${AppStrings.counterLabel} ${model.count}", 
                         style: TextStyle(
