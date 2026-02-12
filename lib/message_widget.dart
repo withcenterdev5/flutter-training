@@ -28,11 +28,16 @@ class _MessageWidgetState extends State<MessageWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          if(_showMessage) Text("Hello Flutter!"),
-          ElevatedButton(onPressed: () => toggleShowMessage(), child: Text("tap to show the message"))
-        ],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: .center,
+            children: [
+              if(_showMessage) Text("Hello Flutter!"),
+              ElevatedButton(onPressed: () => toggleShowMessage(), child: Text("tap to show the message"))
+            ],
+          ),
+        ),
       ),
     );
   }
