@@ -1,49 +1,54 @@
 import 'package:flutter/material.dart';
 
-class CounterController {
-  CounterController({required this.defaultCount});
-  int defaultCount;
-  late final _CounterState state;
-  int get count => state.count;
-  void reset() {
-    state.reset();
-  }
-}
+// 1. Logic Layer (ViewModel/Controller)
+class CounterViewModel extends ChangeNotifier {
+  int _count;
+  CounterViewModel({int defaultCount = 0}) : _count = defaultCount;
 
-class Counter extends StatefulWidget {
-  const Counter({super.key, required this.controller});
-  final CounterController controller;
-
-  @override
-  State<Counter> createState() => _CounterState();
-}
-
-class _CounterState extends State<Counter> {
-  int count = 0;
+  int get count => _count;
 
   void increment() {
-    setState(() {
-      count++;
-    });
+    _count++;
+    notifyListeners(); // {Link: Medium https://kymoraa.medium.com/flutter-state-management-beginner-basics-counter-example-2b4c469340a6}
   }
 
   void decrement() {
-    setState(() {
-      count--;
-    });
+    _count--;
+    notifyListeners(); // {Link: Medium https://kymoraa.medium.com/flutter-state-management-beginner-basics-counter-example-2b4c469340a6}
   }
 
   void reset() {
-    setState(() {
-      count = 0;
-    });
+    _count = 0;
+    notifyListeners();
   }
+}
 
+// 2. UI Layer (Widget)
+class CounterWidget extends StatefulWidget {
+  const CounterWidget({super.key, required this.viewModel});
+  final CounterViewModel viewModel;
+
+  @override
+  State<CounterWidget> createState() => _CounterWidgetState();
+}
+
+class _CounterWidgetState extends State<CounterWidget> {
   @override
   void initState() {
     super.initState();
-    widget.controller.state = this;
-    count = widget.controller.defaultCount;
+    // Listen to changes to rebuild UI
+    widget.viewModel.addListener(_onViewModelChanged);
+  }
+
+  @override
+  void dispose() {
+    // Clean up listener
+    widget.viewModel.removeListener(_onViewModelChanged);
+    super.dispose();
+  }
+
+  void _onViewModelChanged() {
+    setState(() {});
   }
 
   @override
@@ -51,17 +56,19 @@ class _CounterState extends State<Counter> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Count: $count', style: const TextStyle(fontSize: 24)),
+        Text('Count: ${widget.viewModel.count}',
+            style: const TextStyle(fontSize: 24)),
+        const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: increment,
+              onPressed: widget.viewModel.increment,
               child: const Text('Increment'),
             ),
             const SizedBox(width: 20),
             ElevatedButton(
-              onPressed: decrement,
+              onPressed: widget.viewModel.decrement,
               child: const Text('Decrement'),
             ),
           ],
@@ -70,4 +77,3 @@ class _CounterState extends State<Counter> {
     );
   }
 }
-
