@@ -5,9 +5,9 @@ const String appName = "TODO";
 
 // define your app colors here
 const Color primary = Colors.deepPurpleAccent;
-const Color secondary = Color.fromARGB(255, 87, 87, 134);
+const Color secondary = Color.fromARGB(255, 213, 186, 213);
 
-const Color bgLight = Color.fromARGB(255, 240, 200, 247);
+const Color light = Color.fromARGB(255, 240, 200, 247);
 
 
 // define your font sizes here
@@ -162,7 +162,7 @@ class TodoItem extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10.0),
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       decoration: BoxDecoration(
-        color: bgLight,
+        color: light,
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Row(
