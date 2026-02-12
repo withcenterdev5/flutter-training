@@ -3,7 +3,7 @@ import 'package:counter/constants/app_content_elements.dart';
 import 'package:counter/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// Create the counter counterState with initial state
+// Create the counter cs with initial state
 
 class CounterState extends ChangeNotifier {
   // Initial state for count value
@@ -56,9 +56,9 @@ class _CounterWidgetState extends State<CounterWidget> {
               mainAxisAlignment: .center,
               children: [
                 Consumer<CounterState>(
-                  builder:(context,counterState,child,) => Center(
+                  builder:(context,cs,child,) => Center(
                       child: Text(
-                        "${AppStrings.counterLabel} ${counterState.count}", 
+                        "${AppStrings.counterLabel} ${cs.count}", 
                         style: TextStyle(
                         color: AppColors.dark, 
                         fontSize: AppContentElements.header
@@ -87,22 +87,22 @@ class _CounterWidgetState extends State<CounterWidget> {
             ),
           )
       ),
-      //Buttons for incrementing and decrmenting the count value from the count counterState
+      //Buttons for incrementing and decrmenting the count value from the count cs
       floatingActionButton: Column(
         spacing: 20.0,
         mainAxisAlignment: .end,
         children: [
-          // Calls the increment method from the counter counterState
+          // Calls the increment method from the counter cs
           FloatingActionButton(
             onPressed: () => context.read<CounterState>().increment(),
             child: Icon(Icons.add),
           ),
-          // Calls the decrement method fro the counter counterState
+          // Calls the decrement method fro the counter cs
           FloatingActionButton(
             onPressed: () => context.read<CounterState>().decrement(),
             child: Icon(Icons.remove),
           ),
-          // Calls the reset method fro the counter counterState
+          // Calls the reset method fro the counter cs
           FloatingActionButton(
             onPressed: () => context.read<CounterState>().reset(),
             child: Icon(Icons.refresh),

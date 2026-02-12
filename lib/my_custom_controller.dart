@@ -31,7 +31,7 @@ class SwitchScreen extends StatefulWidget {
 
 class _SwitchScreenState extends State<SwitchScreen> {
   // Instantiate the controller
-  final SwitchController _controller = SwitchController();
+  final SwitchController _controller = .new();
 
   @override
   void dispose() {
