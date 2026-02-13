@@ -14,4 +14,6 @@ class AppStrings {
   static final String typeCountLabel = "Type an amount";
   // increment button label
   static final String incrementButtonLabel = "Increment by the above amount";
+  // reset button label
+  static final String resetButtonLabel = "Reset amount";
 }
