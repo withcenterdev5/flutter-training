@@ -57,16 +57,19 @@ class _CounterWidgetState extends State<CounterWidget> {
               children: [
                 Consumer<CounterState>(
                   builder:(context,cs,child,) => Center(
-                      child: Text(
-                        "${AppStrings.counterLabel} ${cs.count}", 
-                        style: TextStyle(
-                        color: AppColors.dark, 
-                        fontSize: AppContentElements.header
+                      child: Wrap(
+                        children: [Text(
+                          "${AppStrings.counterLabel} ${cs.count}", 
+                          style: TextStyle(
+                          color: AppColors.dark, 
+                          fontSize: AppContentElements.header
+                        )
+                        ),]
                       )
-                    )
                   ),
                 ),
                 TextField(
+                  keyboardType: TextInputType.number,
                   controller: textEditingController,
                   decoration: InputDecoration(
                     hintText: AppStrings.typeCountLabel
@@ -82,6 +85,15 @@ class _CounterWidgetState extends State<CounterWidget> {
                     }
                   }, 
                   child: Text(AppStrings.incrementButtonLabel)
+                ),
+                SizedBox(height: 50),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      textEditingController.clear();
+                    });
+                  }, 
+                  child: Text(AppStrings.resetButtonLabel)
                 )
               ],
             ),
