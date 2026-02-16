@@ -32,8 +32,19 @@ class PriceDisplay extends StatelessWidget {
           children: [
               // by using Consumer widget we prevent the whole outer build() from rebuilding everything inside it, including the elevated button itself. It is unecessary to build the button
               // We only want the Text widget to rebuild that's why we wrapped it inside the Consumer widget!!!
-              Consumer<CoffeeProvider>(builder: (context, value, child) => Text(value.price.toString())),
-              
+              //Consumer<CoffeeProvider>(builder: (context, value, child) => Text(value.price.toString())),
+              // by using Selector wiget we prevent unecessary build of this widget by only listening to one property!
+              Selector<CoffeeProvider, double>(
+                selector: (context, model) => model.price,
+                child: const Icon(Icons.coffee),
+                builder: (context, value, child) => Row(
+                  mainAxisAlignment: .center,
+                  children: [
+                    child!,
+                    Text(value.toString()),
+                  ],
+                ), 
+              ),
               ElevatedButton(
                 child: Text('Go Large!'),
                 onPressed: () {
