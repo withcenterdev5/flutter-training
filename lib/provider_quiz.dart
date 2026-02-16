@@ -23,7 +23,6 @@ class PriceDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    var coffee = context.watch<CoffeeProvider>();
 
 
     return Scaffold(
@@ -31,16 +30,16 @@ class PriceDisplay extends StatelessWidget {
         child: Column(
           mainAxisAlignment: .center,
           children: [
-            Text(coffee.price.toString()),
-            ElevatedButton(
-              child: Text('Go Large!'),
-              onPressed: () {
-                // TODO: Use the context to call updateSize('Large') 
-                // Hint: Do we need the button itself to "watch" the changes?
-                // Your code here
-                context.read<CoffeeProvider>().updateSize("Large");
-              },
-          )
+              // by using Consumer widget we prevent the whole outer build() from rebuilding everything inside it, including the elevated button itself. It is unecessary to build the button
+              // We only want the Text widget to rebuild that's why we wrapped it inside the Consumer widget!!!
+              Consumer<CoffeeProvider>(builder: (context, value, child) => Text(value.price.toString())),
+              
+              ElevatedButton(
+                child: Text('Go Large!'),
+                onPressed: () {
+                  
+                },
+            )
           ],
         ),
       ),
