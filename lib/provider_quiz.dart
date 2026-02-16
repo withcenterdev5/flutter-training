@@ -57,15 +57,16 @@ class PriceDisplay extends StatelessWidget {
                   children: [
                     child!,
                     Text(value.toString()),
-                    ElevatedButton(
-                    child: Text('Go Large!'),
-                    onPressed: () {
-                      context.read<CoffeeProvider>().updateSize("Large");
-                    },
-            )
                   ],
                 ), 
               ),
+              ElevatedButton(
+                child: Text('Go Large!'),
+                onPressed: () {
+                  context.read<CoffeeProvider>().updateSize("Large");
+                },
+              ), 
+              PremiumToggle()
               
           ],
         ),
@@ -74,13 +75,52 @@ class PriceDisplay extends StatelessWidget {
   }
 }
 
+class PremiumToggle extends StatelessWidget {
+  const PremiumToggle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // 1. WATCH the UserProvider to see if we are currently premium
+    final isPremium = context.watch<UserProvider>().isPremium;
+
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isPremium ? Colors.amber : Colors.grey,
+      ),
+      child: Text(isPremium ? 'Premium Active' : 'Go Premium'),
+      onPressed: () {
+        // TODO: Access the UserProvider and call the function to toggle status.
+        // Hint: We are inside an onPressed, so use the "one-time access" method.
+        
+        // YOUR CODE HERE
+        context.read<UserProvider>().togglePremium();
+      },
+    );
+  }
+}
+
+
 
 void main(){
   runApp(
-    MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => CoffeeProvider(),)], 
-      child: MaterialApp(
-        home: PriceDisplay()
-      ),)
+   MultiProvider(
+      providers: [
+        // Create the source of truth
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        // Glue the UserProvider to the CoffeeProvider
+        ChangeNotifierProxyProvider<UserProvider, CoffeeProvider>(
+          // 1. Create the initial object
+          create: (_) => CoffeeProvider(isPremiumUser: false),
+          // 2. Update it when UserProvider changes
+          update: (context, userProvider, coffeeProvider) {
+            // We update the existing coffeeProvider rather than creating a new one
+            // This preserves the 'size' state (Small/Large)
+            coffeeProvider!.isPremiumUser = userProvider.isPremium; 
+            return coffeeProvider;                              
+          },
+        ),
+      ],
+      child: MaterialApp(home: PriceDisplay()),
+    )
   );
 }
