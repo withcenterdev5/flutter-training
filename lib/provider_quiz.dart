@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
+class UserProvider extends ChangeNotifier {
+  bool _isPremium = false;
+  bool get isPremium => _isPremium;
+
+  void togglePremium(){
+    _isPremium = !_isPremium;
+    notifyListeners();
+  }
+}
+
+
 class CoffeeProvider extends ChangeNotifier {
   String _size = 'Small';
   double _price = 3.50;
+  bool isPremiumUser;
+
+  CoffeeProvider({required this.isPremiumUser});
 
   String get size => _size;
-  double get price => _price;
+  double get price => isPremiumUser ? 2.50 : _price;
 
   void updateSize(String newSize) {
     _size = newSize;
@@ -37,20 +52,21 @@ class PriceDisplay extends StatelessWidget {
               Selector<CoffeeProvider, double>(
                 selector: (context, model) => model.price,
                 child: const Icon(Icons.coffee),
-                builder: (context, value, child) => Row(
+                builder: (context, value, child) => Column(
                   mainAxisAlignment: .center,
                   children: [
                     child!,
                     Text(value.toString()),
+                    ElevatedButton(
+                    child: Text('Go Large!'),
+                    onPressed: () {
+                      context.read<CoffeeProvider>().updateSize("Large");
+                    },
+            )
                   ],
                 ), 
               ),
-              ElevatedButton(
-                child: Text('Go Large!'),
-                onPressed: () {
-                  
-                },
-            )
+              
           ],
         ),
       ),
