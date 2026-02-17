@@ -68,8 +68,7 @@ class _HomeState extends State<Home> {
   }
 }
 
-class ButtonRow extends StatelessWidget {
-  final 
+class ButtonRow extends StatelessWidget { 
   const ButtonRow({super.key});
 
   @override
@@ -77,7 +76,7 @@ class ButtonRow extends StatelessWidget {
     return  Row(
                 mainAxisAlignment: .spaceEvenly,
                 children: [
-                 CalculatorButton(text: "AC", backgroundColor: )
+                 //CalculatorButton(text: "AC", backgroundColor: )
                 ],
               );
   }
