@@ -30,7 +30,7 @@ class Post{
   Post({required this.id, required this.title, required this.userId});
 
 }
-// end of post model
+
 // post service
 class PostService {
   Future<List<Post>> fetchPosts() async {
