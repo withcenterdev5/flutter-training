@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// post model
+
 class Post{
   final int id;
   final String title;
@@ -30,7 +30,10 @@ class Post{
   Post({required this.id, required this.title, required this.userId});
 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> feat/example-feat
 // post service
 class PostService {
   Future<List<Post>> fetchPosts() async {
@@ -43,6 +46,7 @@ class PostService {
       Post(id: 3, title: "Why Shimmers beat Spinners", userId: 11),
       Post(id: 4, title: "Clean Architecture for Teams", userId: 12),
       Post(id: 5, title: "Advanced Bloc Techniques", userId: 12),
+
     ];
   }
 }
