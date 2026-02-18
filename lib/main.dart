@@ -42,7 +42,7 @@ class PostService {
       Post(id: 2, title: "The Power of Sealed Classes", userId: 10),
       Post(id: 3, title: "Why Shimmers beat Spinners", userId: 11),
       Post(id: 4, title: "Clean Architecture for Teams", userId: 12),
-      Post(id: 5, title: "Advanced Provider Techniques", userId: 12),
+      Post(id: 5, title: "Advanced Bloc Techniques", userId: 12),
     ];
   }
 }
