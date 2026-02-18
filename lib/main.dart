@@ -30,10 +30,6 @@ class Post{
   Post({required this.id, required this.title, required this.userId});
 
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> feat/example-feat
 // post service
 class PostService {
   Future<List<Post>> fetchPosts() async {
